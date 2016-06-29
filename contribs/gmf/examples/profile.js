@@ -1,6 +1,8 @@
 goog.provide('gmfapp.profile');
 
 goog.require('ngeo.FeatureOverlayMgr');
+goog.require('gmf.Permalink');
+goog.require('gmf.Snapping');
 /** @suppress {extraRequire} */
 goog.require('gmf.mapDirective');
 /** @suppress {extraRequire} */
