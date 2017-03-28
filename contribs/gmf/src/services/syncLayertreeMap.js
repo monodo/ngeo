@@ -290,11 +290,15 @@ gmf.SyncLayertreeMap.prototype.createWMTSLayer_ = function(gmfLayerWMTS) {
   const newLayer = new ol.layer.Tile();
   goog.asserts.assert(gmfLayerWMTS.url);
   goog.asserts.assert(gmfLayerWMTS.layer);
-  this.layerHelper_.createWMTSLayerFromCapabilitites(gmfLayerWMTS.url,
-        gmfLayerWMTS.layer, gmfLayerWMTS.dimensions).then((layer) => {
-          newLayer.setSource(layer.getSource());
-          newLayer.set('capabilitiesStyles', layer.get('capabilitiesStyles'));
-        });
+  this.layerHelper_.createWMTSLayerFromCapabilitites(
+    gmfLayerWMTS.url,
+    gmfLayerWMTS.layer,
+    gmfLayerWMTS.dimensions,
+    gmfLayerWMTS.metadata.opacity
+  ).then((layer) => {
+    newLayer.setSource(layer.getSource());
+    newLayer.set('capabilitiesStyles', layer.get('capabilitiesStyles'));
+  });
   return newLayer;
 };
 
@@ -305,8 +309,7 @@ gmf.SyncLayertreeMap.prototype.createWMTSLayer_ = function(gmfLayerWMTS) {
  * @param {ol.layer.Base} layer A layer.
  * @private
  */
-gmf.SyncLayertreeMap.prototype.updateLayerReferences_ = function(leafNode,
-    layer) {
+gmf.SyncLayertreeMap.prototype.updateLayerReferences_ = function(leafNode, layer) {
   const id = leafNode.id;
   const querySourceIds = layer.get('querySourceIds') || [];
   querySourceIds.push(id);

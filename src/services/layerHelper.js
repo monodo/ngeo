@@ -101,14 +101,17 @@ ngeo.LayerHelper.prototype.createBasicWMSLayer = function(sourceURL,
  * @param {string} capabilitiesURL The getCapabilities url.
  * @param {string} layerName The name of the layer.
  * @param {Object.<string, string>=} opt_dimensions WMTS dimensions.
+ * @param {number=} opt_opacity Layer opacity.
  * @return {angular.$q.Promise.<ol.layer.Tile>} A Promise with a layer (with source) on success,
  *     no layer else.
  * @export
  */
-ngeo.LayerHelper.prototype.createWMTSLayerFromCapabilitites = function(capabilitiesURL, layerName, opt_dimensions) {
+ngeo.LayerHelper.prototype.createWMTSLayerFromCapabilitites = function(capabilitiesURL, layerName, opt_dimensions, opt_opacity) {
   const parser = new ol.format.WMTSCapabilities();
+  console.log('opacity ?');
   const layer = new ol.layer.Tile({
-    preload: Infinity
+    preload: Infinity,
+    opacity: opt_opacity !== undefined ? opt_opacity : 1.0
   });
   const $q = this.$q_;
 

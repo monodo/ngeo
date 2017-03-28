@@ -272,7 +272,8 @@ gmf.Themes.prototype.getBgLayers = function(appDimensions) {
       return layerHelper.createWMTSLayerFromCapabilitites(
           gmfLayerWMTS.url,
           gmfLayerWMTS.layer || '',
-          gmfLayer.dimensions
+          gmfLayer.dimensions,
+          gmfLayerWMTS.metadata.opacity
       ).then(callback.bind(null, gmfLayer)).then(null, (response) => {
         console.error('unable to get capabilities', gmfLayerWMTS.layer, gmfLayerWMTS.url);
         console.error(response['message']);
